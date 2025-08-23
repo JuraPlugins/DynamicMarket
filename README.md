@@ -13,14 +13,11 @@
 - [🚀 Kurulum](#-kurulum)
 - [⚙️ Konfigürasyon](#️-konfigürasyon)
 - [📖 Kullanım](#-kullanım)
-- [🔧 API](#-api)
 - [🌍 Çoklu Dil Desteği](#-çoklu-dil-desteği)
 - [📊 Görev Sistemi](#-görev-sistemi)
 - [🏆 Sıralama Sistemi](#-sıralama-sistemi)
 - [🎉 Etkinlik Sistemi](#-etkinlik-sistemi)
-- [📁 Proje Yapısı](#-proje-yapısı)
-- [🛠️ Geliştirme](#️-geliştirme)
-- [🤝 Katkıda Bulunma](#-katkıda-bulunma)
+- [🤝 Geliştiriciler](#-geliştiriciler)
 - [📄 Lisans](#-lisans)
 
 ## 🎯 Özellikler
@@ -77,15 +74,6 @@
    - `plugins/DynamicMarket/` klasörü otomatik oluşturulur
    - `config.yml` dosyası otomatik oluşturulur
    - Dil dosyaları otomatik yüklenir
-
-### Hızlı Kurulum (Docker)
-```dockerfile
-FROM openjdk:17-jre-slim
-WORKDIR /minecraft
-COPY DynamicMarket.jar plugins/
-EXPOSE 25565
-CMD ["java", "-jar", "server.jar"]
-```
 
 ## ⚙️ Konfigürasyon
 
@@ -176,35 +164,6 @@ public interface MarketAPI {
 }
 ```
 
-### API Kullanım Örneği
-
-```java
-// API'yi al
-MarketAPI api = Bukkit.getServicesManager()
-    .getRegistration(MarketAPI.class)
-    .getProvider();
-
-// Fiyat bilgisi al
-double price = api.getPrice("diamond");
-
-// Fiyat ayarla
-api.setPrice("diamond", 250.0);
-```
-
-### Event Sistemi
-
-```java
-@EventHandler
-public void onMarketSell(DynamicMarketSellEvent event) {
-    Player player = event.getPlayer();
-    double amount = event.getAmount();
-    Material item = event.getItem();
-    
-    // Özel işlemler
-    player.sendMessage("Satış tamamlandı: " + amount + "x " + item.name());
-}
-```
-
 ## 🌍 Çoklu Dil Desteği
 
 ### Desteklenen Diller
@@ -216,12 +175,6 @@ public void onMarketSell(DynamicMarketSellEvent event) {
 # config.yml
 language: "tr"  # Türkçe için
 language: "en"  # İngilizce için
-```
-
-### Özel Mesaj Ekleme
-```yaml
-# messages_tr.yml
-custom_message: "&aÖzel mesajınız burada!"
 ```
 
 ## 📊 Görev Sistemi
@@ -278,165 +231,47 @@ custom_message: "&aÖzel mesajınız burada!"
 - **Özel Görevler**: Etkinliğe özel görevler
 - **Sıralama Yarışması**: Etkinlik süresince sıralama
 
-### Etkinlik Yönetimi
-```java
-// Etkinlik başlat
-marketManager.etkinlikBaslat(2.0, 3600000); // 2x bonus, 1 saat
-
-// Etkinlik kontrol
-marketManager.etkinlikKontrolVeBitir();
-```
-
-## 📁 Proje Yapısı
-
-```
-DynamicMarket/
-├── src/main/java/me/example/
-│   ├── DynamicMarket.java          # Ana eklenti sınıfı
-│   ├── MarketManager.java          # Market yönetim sistemi
-│   ├── MarketListener.java         # Event dinleyicileri
-│   ├── MarketRankingGUI.java      # Sıralama arayüzü
-│   ├── PriceFluctuationTask.java  # Fiyat dalgalanma görevi
-│   ├── EarningsStorage.java       # Kazanç veri saklama
-│   ├── LocalizationManager.java   # Çoklu dil yöneticisi
-│   ├── marketapi/                  # API paketi
-│   │   ├── MarketAPI.java         # API interface
-│   │   └── MarketAPIProvider.java # API sağlayıcı
-│   ├── event/                      # Event paketi
-│   │   └── DynamicMarketSellEvent.java
-│   ├── tagsintegration/            # Tags entegrasyonu
-│   │   ├── TagsMarketIntegration.java
-│   │   └── TagsPlugin.java
-│   └── util/                       # Yardımcı sınıflar
-│       └── MessageUtils.java
-├── src/main/resources/
-│   ├── config.yml                  # Ana konfigürasyon
-│   ├── quest_templates.yml        # Görev şablonları
-│   ├── lang/                       # Dil dosyaları
-│   │   ├── messages_tr.yml        # Türkçe mesajlar
-│   │   └── messages_en.yml        # İngilizce mesajlar
-│   └── plugin.yml                  # Eklenti meta verisi
-├── pom.xml                         # Maven konfigürasyonu
-└── README.md                       # Bu dosya
-```
-
-## 🛠️ Geliştirme
-
-### Gereksinimler
-- **Java 17+**
-- **Maven 3.6+**
-- **Spigot API 1.20.4+**
-- **IDE**: IntelliJ IDEA, Eclipse veya VS Code
-
-### Geliştirme Ortamı Kurulumu
-
-1. **Projeyi Klonlayın**
-   ```bash
-   git clone https://github.com/JuraPlugins/DynamicMarket.git
-   cd DynamicMarket
-   ```
-
-2. **Maven Dependencies'i İndirin**
-   ```bash
-   mvn clean install
-   ```
-
-3. **IDE'de Açın**
-   - IntelliJ IDEA: `File > Open > pom.xml`
-   - Eclipse: `File > Import > Maven > Existing Maven Projects`
-
-### Build İşlemi
-```bash
-# JAR dosyası oluştur
-mvn clean package
-
-# Test çalıştır
-mvn test
-
-# Javadoc oluştur
-mvn javadoc:javadoc
-```
-
-### Kod Standartları
-- **Java Naming Convention**: camelCase metodlar, PascalCase sınıflar
-- **Package Structure**: Mantıklı paket organizasyonu
-- **Documentation**: Tüm public metodlar için Javadoc
-- **Error Handling**: Try-catch blokları ile hata yönetimi
-
-## 🤝 Katkıda Bulunma
-
-### Katkı Süreci
-
-1. **Fork Yapın**: Projeyi kendi hesabınıza fork edin
-2. **Branch Oluşturun**: `git checkout -b feature/amazing-feature`
-3. **Değişiklikleri Commit Edin**: `git commit -m 'Add amazing feature'`
-4. **Push Yapın**: `git push origin feature/amazing-feature`
-5. **Pull Request Oluşturun**: GitHub'da PR açın
-
-### Katkı Alanları
-- 🐛 **Bug Fixes**: Hata düzeltmeleri
-- ✨ **New Features**: Yeni özellikler
-- 📚 **Documentation**: Dokümantasyon iyileştirmeleri
-- 🌍 **Translations**: Yeni dil desteği
-- 🎨 **UI Improvements**: Arayüz iyileştirmeleri
-
-### Geliştirici Rehberi
-- **Event Handling**: Bukkit event sistemi kullanın
-- **Configuration**: YAML dosyalarını tercih edin
-- **Localization**: Çoklu dil desteği ekleyin
-- **Performance**: Async işlemler için BukkitRunnable kullanın
-
 ## 📄 Lisans
 
-Bu proje **MIT License** altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+Bu proje **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License** altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
+### 🚫 **Lisans Kısıtlamaları:**
+
+**İZİNLER:**
+- ✅ Eklentiyi kullanabilirsiniz
+- ✅ Orijinal yazarın adını belirtmelisiniz
+
+**YASAKLAR:**
+- ❌ **Ticari amaçla kullanamazsınız**
+- ❌ **Değiştiremez veya türetemezsiniz**
+- ❌ **Tekrar dağıtamazsınız**
+- ❌ **Başka projelerde kullanamazsınız**
+
+### 📋 **Lisans Detayları:**
 ```
-MIT License
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
 
-Copyright (c) 2024 DynamicMarket Contributors
+Bu lisans altında:
+- Eklentiyi kullanabilirsiniz
+- Orijinal yazarın adını belirtmelisiniz
+- Ticari amaçla kullanamazsınız
+- Değiştiremez veya tekrar yayınlayamazsınız
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Ticari kullanım veya özel izin için: info@juraplugins.com
 ```
 
-## 🙏 Teşekkürler
+## 🙏 Geliştiriciler
 
-- **Spigot Team**: Minecraft eklenti geliştirme platformu
-- **Vault Team**: Ekonomi sistemi entegrasyonu
-- **Minecraft Community**: Test ve geri bildirim için
-- **Contributors**: Kod katkıları için
+- **Sakhino**: [@DogukanKckal](https://github.com/DogukanKckal)
 
 ## 📞 İletişim
 
 - **GitHub**: [@JuraPlugins](https://github.com/JuraPlugins)
-- **Discord**: [JuraPlugins Discord](https://discord.gg/juraplugins)
-- **Email**: info@juraplugins.com
-- **Issues**: [GitHub Issues](https://github.com/JuraPlugins/DynamicMarket/issues)
-
-## 📊 Proje İstatistikleri
-
-![GitHub stars](https://img.shields.io/github/stars/JuraPlugins/DynamicMarket)
-![GitHub forks](https://img.shields.io/github/forks/JuraPlugins/DynamicMarket)
-![GitHub issues](https://img.shields.io/github/issues/JuraPlugins/DynamicMarket)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/JuraPlugins/DynamicMarket)
+- **Discord**: [JuraPlugins Discord](https://discord.gg/PPwnMCh)
+- **Email**: info@juraplugins.shop
 
 ---
 
 ⭐ **Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!** ⭐
 
-**Made with ❤️ by the DynamicMarket Team**
+**Made with ❤️ by the JuraPlugins Team**
