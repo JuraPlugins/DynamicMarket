@@ -1,4 +1,4 @@
-# 🏪 DynamicMarket - Minecraft Dinamik Market Eklentisi
+# 🏪 DynamicMarket - Minecraft Dinamik Market Eklentisi - Jura Plugins
 
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-1.18%20%7C%201.19%20%7C%201.20-blue.svg)](https://www.minecraft.net/)
 [![Java Version](https://img.shields.io/badge/Java-17+-orange.svg)](https://adoptium.net/)
@@ -6,6 +6,7 @@
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/JuraPlugins/DynamicMarket)
 
 > **Minecraft sunucuları için gelişmiş, dinamik fiyatlı, çok dilli market sistemi**
+> **Created by Sakhino [@DogukanKckal](https://github.com/DogukanKckal) and JuraPlugins
 
 ## 📋 İçindekiler
 
