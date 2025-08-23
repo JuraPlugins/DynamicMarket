@@ -6,7 +6,7 @@
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/JuraPlugins/DynamicMarket)
 
 > **Minecraft sunucuları için gelişmiş, dinamik fiyatlı, çok dilli market sistemi**
-> **Created by Sakhino [@DogukanKckal](https://github.com/DogukanKckal) and JuraPlugins
+> **Created by Sakhino [@DogukanKckal](https://github.com/DogukanKckal) and JuraPlugins**
 
 ## 📋 İçindekiler
 
