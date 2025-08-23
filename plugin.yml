@@ -1,0 +1,25 @@
+
+name: DynamicMarket
+main: me.example.DynamicMarket
+version: 1.0
+api-version: 1.20
+depend: [Vault]
+author: jura plugins
+commands:
+  market:
+    description: Open the dynamic market
+    usage: /market
+  marketadmin:
+    description: Admin commands for market management
+    usage: /marketadmin <reload|setprice|info>
+    permission: dynamicmarket.admin
+  marketsat:
+    description: Satış komutu ile ürün sat
+    usage: /marketsat <ürün> [miktar]
+  marketsiralama:
+    description: Market sıralama guisi
+    usage: /marketsiralama [gunluk]
+permissions:
+  dynamicmarket.admin:
+    description: Allows access to market admin commands
+    default: op

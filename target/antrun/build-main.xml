@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy file="C:\Users\doguk\OneDrive\Masaüstü\python projeleri\Hesap bilgileri\Minecraft için geliştirilen eklentiler\marketpluginiV2\target/dynamicmarket-1.0-SNAPSHOT.jar" todir="C:/Users/doguk/OneDrive/Masaüstü/serverbuild1/plugins" overwrite="true"/>
+</target>
+</project>

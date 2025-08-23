@@ -1,0 +1,28 @@
+name: DynamicMarket
+version: 1.0-SNAPSHOT
+main: me.example.DynamicMarket
+api-version: 1.20
+depend: [Vault]
+author: jura plugins
+description: Dynamic Market Plugin for Minecraft
+website: https://www.juraplugins.shop/
+
+commands:
+  market:
+    description: Open market GUI
+    usage: /market
+  marketsat:
+    description: Sell items to market
+    usage: /marketsat <item> [amount] [multiplier]
+  marketadmin:
+    description: Market admin commands
+    usage: /marketadmin <reload|info|maintenance|setprice>
+    permission: dynamicmarket.admin
+  marketgorev:
+    description: Open quest GUI
+    usage: /marketgorev
+
+permissions:
+  dynamicmarket.admin:
+    description: Admin permissions
+    default: op
